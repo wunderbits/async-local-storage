@@ -177,33 +177,3 @@ setTimeout(() => {
   console.info(als.currentId());
 }, 10);
 ```
-
-### use
-
-get the use time of id
-
-- `id` The tigger id, default is `als.currentId()`
-
-```js
-als.enable()
-setTimeout(() => {
-  const id = als.currentId();
-  console.info(als.use(id));
-}, 10);
-```
-
-### enableCreateTime
-
-enable create time of data, default is enabled.
-
-```js
-als.enableCreateTime();
-```
-
-### disableCreateTime
-
-disable create time of data, it can save memory.
-
-```js
-als.disableCreateTime();
-```

@@ -1,3 +1,6 @@
+# 3.0.0
+* disable time recording
+
 # 2.3.0
 
 * support enable/disable create time for save memory 

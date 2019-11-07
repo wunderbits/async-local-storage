@@ -1,5 +1,4 @@
 const asyncHooks = require('async_hooks');
-const nano = require('nano-seconds');
 const util = require('util');
 const fs = require('fs');
 
@@ -16,7 +15,6 @@ function debug(...args) {
 }
 
 let defaultLinkedTop = false;
-let enabledCreatedAt = true;
 
 function isUndefined(value) {
   return value === undefined;
@@ -57,10 +55,6 @@ let currentId = 0;
 const hooks = asyncHooks.createHook({
   init: function init(id, type, triggerId) {
     const data = {};
-    // init, set the created time
-    if (enabledCreatedAt) {
-      data.created = nano.now();
-    }
     const parentId = triggerId || currentId;
     // not trigger by itself, add parent
     if (parentId !== id) {
@@ -204,20 +198,6 @@ exports.remove = function removeValue() {
 };
 
 /**
- * Get the use the of id
- * @param {Number} id The trigger id, is optional, default is `als.currentId()`
- * @returns {Number} The use time(ns) of the current id
- */
-exports.use = function getUse(id) {
-  const data = map.get(id || getCurrentId());
-  /* istanbul ignore if */
-  if (!data || !enabledCreatedAt) {
-    return -1;
-  }
-  return nano.difference(data.created);
-};
-
-/**
  * Get the top value
  */
 exports.top = function top() {
@@ -238,18 +218,4 @@ exports.scope = function scope() {
  */
 exports.getAllData = function getAllData() {
   return map;
-};
-
-/**
- * Enable the create time of data
- */
-exports.enableCreateTime = function enableCreateTime() {
-  enabledCreatedAt = true;
-};
-
-/**
- * Disable the create time of data
- */
-exports.disableCreateTime = function disableCreateTime() {
-  enabledCreatedAt = false;
 };
