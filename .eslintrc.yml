@@ -11,10 +11,6 @@ rules:
     - .mjs
     - .js
     - .json
-globals:
-  test: true
-  expect: true
-  describe: true
-  afterAll: true
-  beforeAll: true
-  beforeEach: true
+env:
+  es6: true
+  jest: true

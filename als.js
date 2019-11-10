@@ -4,6 +4,8 @@ const fs = require('fs');
 
 const map = new Map();
 
+let alsEnabled = false;
+
 const enabledDebug = process.env.DEBUG === 'als';
 
 function debug(...args) {
@@ -102,12 +104,26 @@ exports.currentId = getCurrentId;
 /**
  * Enable the async hook
  */
-exports.enable = () => hooks.enable();
+exports.enable = () => {
+  const asyncHook = hooks.enable();
+  alsEnabled = true;
+  return asyncHook;
+};
 
 /**
  * Disable the async hook
  */
-exports.disable = () => hooks.disable();
+exports.disable = () => {
+  const asyncHook = hooks.disable();
+  alsEnabled = false;
+  return asyncHook;
+};
+
+/** Tells if async hook is enabled */
+exports.isEnabled = () => alsEnabled;
+
+/** Tells if async hook is disabled */
+exports.isDisabled = () => !alsEnabled;
 
 /**
  * Get the size of map

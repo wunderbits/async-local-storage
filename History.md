@@ -1,4 +1,9 @@
+# 3.1.0
+
+* add `isEnabled` and `isDisabled` methods
+
 # 3.0.0
+
 * disable time recording
 
 # 2.3.0

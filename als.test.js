@@ -258,6 +258,32 @@ describe('linked top', () => {
   });
 });
 
+describe('isEnabled', () => {
+  test('after enabled, it is enabled', () => {
+    expect(als.isEnabled()).toBe(true);
+  });
+  test('after enabled, it is not be disabled', () => {
+    expect(als.isDisabled()).toBe(false);
+  });
+
+  describe('after disable it', () => {
+    beforeEach(() => {
+      als.disable();
+    });
+    afterEach(() => {
+      als.enable();
+    });
+
+    test('after disable, it disabled', () => {
+      expect(als.isDisabled()).toBe(true);
+    });
+
+    test('after disable, it is not enabled', () => {
+      expect(als.isEnabled()).toBe(false);
+    });
+  });
+});
+
 describe('size', () => {
   test('get size', () => {
     expect(als.size()).toBeGreaterThan(1);
